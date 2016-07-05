@@ -1,0 +1,204 @@
+<html>
+<head>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./Custom.css">
+
+</head>
+<body class="container-fluid">
+    
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2>Student Details </h2>
+        </div>
+        <div class="panel-body">
+            
+            <h2>Student Details Grid <span style="color:darkorange;font-size:20px;float:right"> &#9888; Don't refresh the page, or all the data will be lost </span></h2>
+            <ul class="list-group" id="studentGrid">
+
+                <li class="list-group-item list-group-item-danger">
+
+                    <div class="row">
+                        <div class="col-sm-1 hidden">
+                            StudentId
+                        </div>
+                        <div class="col-sm-1">
+                            Sl. No.
+                        </div>
+                        <div class="col-sm-2">
+                            First Name
+                        </div>
+                        <div class="col-sm-2">
+                            Last Name
+                        </div>
+                        <div class="col-sm-1">
+                            Gender
+                        </div>
+                        <div class="col-sm-1">
+                            Country
+                        </div>
+                        <div class="col-sm-2">
+                            State
+                        </div>
+                        <div class="col-sm-1">
+                            City
+                        </div>
+                        <div class="col-sm-1">
+                            Edit
+                        </div>
+                        <div class="col-sm-1">
+                            Delete
+                        </div>
+                    </div>
+                </li>       
+                
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            ------------ No students in Array Object ------------
+                        </div>
+                    </div>
+
+                </li>                                                                                 
+            </ul>
+                      
+            <div class="row">
+                <div class="col-sm-12">
+                    <button class="btn btn-primary" id="AddNew">Add New</button>
+                </div>
+            </div>           
+
+        </div>
+        <div class="panel-footer" id="footer"></div>
+    </div>
+
+    <div class="container">
+        <div class="modal fade" id="AddNewModal" role="dialog">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add New Student Details</h4>
+                    </div>
+                    
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <form id="AddForm" class="form-horizontal">
+
+                                    <div class="row">
+                                        <div class="form-group has-feedback" id="fname-Grp">
+                                            <div class="col-sm-3 text">
+                                                First Name :
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input type="text" id="fname" class="form-control" autocomplete="off" maxlength="30" placeholder="Enter First Name (Max 30)" />
+                                                <span class="glyphicon form-control-feedback" id="fname-Glyph"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group has-feedback" id="lname-Grp">
+                                            <div class="col-sm-3 text">
+                                                Last Name :
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input type="text" id="lname" class="form-control" autocomplete="off" required maxlength="30" placeholder="Enter Last Name (Max 30)" />
+                                                <span class="glyphicon form-control-feedback" id="lname-Glyph"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group has-feedback" id="gender-Grp">
+                                            <div class="col-sm-3 text">
+                                                Gender :
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="btn-group" data-toggle="buttons" name="genderDiv" id="genderDiv">
+                                                    <label class="btn btn-primary">
+                                                        <input type="radio" name="gender" id="male" autocomplete="off" value="male" checked="checked"> Male
+                                                    </label>
+                                                    <label class="btn btn-primary">
+                                                        <input type="radio" name="gender" id="female" autocomplete="off" value="female"> Female
+                                                    </label>
+                                                    <label class="btn btn-primary">
+                                                        <input type="radio" name="gender" id="others" autocomplete="off" value="others"> Others
+                                                    </label>
+                                                </div>
+                                                <span id="gender-Glyph" class="glyphicon form-control-feedback"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group has-feedback col-sm-12" id="country-Grp">
+                                            <div class="col-sm-3 text">
+                                                Select Location:
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <select name="country" class="countries form-control" id="countySel">
+                                                    <option value="">Select Country</option>
+                                                </select>
+                                                <span id="country-Glyph" class="glyphicon form-control-feedback"></span>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="form-group has-feedback col-sm-12">
+                                            <div class="col-sm-3"></div>
+                                            <div class="col-sm-9" id="state-Grp">
+                                                <select name="state" class="states form-control" id="stateSel">
+                                                    <option value="">Select State</option>
+                                                </select>
+                                                <span id="state-Glyph" class="glyphicon form-control-feedback"></span>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group has-feedback col-sm-12">
+                                            <div class="col-sm-3"></div>
+                                            <div class="col-sm-9" id="city-Grp">
+                                                <select name="city" class="cities form-control" id="citySel">
+                                                    <option value="">Select City</option>
+                                                </select>
+                                                <span id="city-Glyph" class="glyphicon form-control-feedback"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" id="Add-Cancel">Cancel</button>
+                            <button type="button" class="btn btn-info" id="Add-Btn">Add</button>
+                        </div>
+                    
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <!--<script src="http://iamrohit.in/lab/js/location.js"></script>-->
+        <script src="./Custom.js"></script>
+
+        <script>
+        $(document).ready(function () {
+
+        });
+        </script>
+</body>
+</html>

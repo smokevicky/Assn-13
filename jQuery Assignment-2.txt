@@ -1,0 +1,19 @@
+Using jQuery do following things:
+
+#1. Create a javascript array with list of students(Id, FirstName, LastName, Gender, Country, state, city).	
+#2. Create a javascript array with list of countries(Id, Name)
+#3. Create a javascript array with list of States(Id, Name, CountryId)
+#4. Create a javascript array with list of Cities(Id, Name, StateId)
+#5. Put add button, after clicking on this button, add student form will be sliding down to input student detail and save. 
+This form will contain:
+FirstName, LastName(textbox)
+Gender(radion buttons)
+Country, State, City(Cascading dropdownlist)
+All filelds are required. Need to check required field validation for all fields before doing save. After saving, 
+populate grid with updated students.
+#6. Create a grid to display all students. Every row has a edit and delete link. After clicking on edit link, edit
+ form will be displayed with student information, user can edit and save details and populate grid with updated 
+students. This form also contains same field like Add Student Form. After clicking on delete link, delete a student 
+from list and populate grid with updated students.
+
+Note: Everything will be done on client side and without page refresh.

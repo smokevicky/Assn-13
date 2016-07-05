@@ -1,0 +1,17 @@
+
+.panel > .panel-heading{
+        background-color:#6fb1e9;
+    }
+    .list-group-item-danger{
+        font-weight:bold;
+    }
+    #AddNew{
+        float:right;
+        width:150px;
+    }
+    #Add-Btn{
+        width:100px;
+    }
+    .text{
+        text-align:right;
+    }
