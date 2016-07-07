@@ -3,150 +3,94 @@ var studentId = 0;
 var slNo = 1;
 var edit = false;
 var editId = 0;
-var students = [];                                              //array object
 
+//All the Objects
+    var students = [];                                                                    //array object
 
+    var countries = [{ id: 1, name: "India" }, { id: 2, name: "Pakistan" }];        
 
-
-     
-
-
-
-    var countryStateInfo = {                                                            //countryStateCity Object
-        "India": {
-
-            "Odisha": ["Bhubaneswar", "Bolangir", "Cuttack"],
-            "Andaman and Nicobar Islands": ["Bombuflat", "Port-Blair"],
-            "Assam": ["Abhayapuri", "Ambikapur"],
-            "West Bengal": ["Kharagpur", "Kolkata"]
-        },
-        "Pakistan": {
-            "Baluchistan": ["Barkhan"],
-            "Punjab": ["Adampur", "Amritsar"],
-            "Sind": ["Adilpur", "Badah"]
-        }
-    }
+    var states = [{ id: 1, name: "Odisha", countryId: 1 },
+                  { id: 2, name: "Andaman and Nicobar Islands", countryId: 1 },
+                  { id: 3, name: "Assam", countryId: 1 },
+                  { id: 4, name: "Baluchistan", countryId: 2 },
+                  { id: 5, name: "Punjab", countryId: 2 },
+                  { id: 6, name: "Sind", countryId: 2 }];
+                    
+    var cities = [{ id: 1, name: "Bhubaneswar", stateId: 1 },
+                  { id: 2, name: "Cuttack", stateId: 1 },
+                  { id: 3, name: "Bombuflat", stateId: 2 },
+                  { id: 4, name: "Port-Blair", stateId: 2 },
+                  { id: 5, name: "Abhayapuri", stateId: 3 },
+                  { id: 6, name: "Barkhan", stateId: 4 },
+                  { id: 7, name: "Adampur", stateId: 5 },
+                  { id: 8, name: "Amritsar", stateId: 5 },
+                  { id: 9, name: "Adilpur", stateId: 6 },
+                  { id: 10, name: "Badah", stateId: 6 }];
 
 $(document).ready(function () {
 
-    var isAddValidated = 0;
-
-
-    //Javascript for Country
-    var countySel = document.getElementById("countySel");
-    var stateSel = document.getElementById("stateSel");
-    var citySel = document.getElementById("citySel");
-
-    for (var country in countryStateInfo) {
-        countySel.options[countySel.options.length] = new Option(country, country);
+    function addCntry(item, index) {                                                                            //Add Country Options
+        $("#countySel").append("<option value='" + item.id + "'>" + item.name + "</option><br />");
     }
 
-    countySel.onchange = function () {
-
-        stateSel.length = 1; // remove all options bar first
-        citySel.length = 1; // remove all options bar first
-
-        if (this.selectedIndex < 1)
-            return; // done
-
-        for (var state in countryStateInfo[this.value]) {
-            stateSel.options[stateSel.options.length] = new Option(state, state);
+    function addState(item, index) {                                                                            // Add State options
+        var id = $("#countySel").val();
+        if (parseInt(item.countryId) == parseInt(id)) {
+            $("#stateSel").append("<option value='" + item.id + "'>" + item.name + "</option><br />");
         }
     }
 
-    stateSel.onchange = function () {
-
-        citySel.length = 1; // remove all options bar first
-
-        if (this.selectedIndex < 1)
-            return; // done
-
-        var city = countryStateInfo[countySel.value][this.value];
-        for (var i = 0; i < city.length; i++) {
-            citySel.options[citySel.options.length] = new Option(city[i], city[i]);
+    function addCity(item, index) {                                                                             //Add City Options
+        var id = $("#stateSel").val();
+        if (parseInt(item.stateId) == parseInt(id)) {
+            $("#citySel").append("<option value='" + item.id + "'>" + item.name + "</option><br />");
         }
     }
-    //end
-
 
     $("#fname").keyup(function () {
         var fname = $("#fname").val();
         if (fname == "") {
-            $("#fname-Grp").removeClass("has-success");
-            $("#fname-Glyph").removeClass("glyphicon-ok");
-            $("#fname-Grp").addClass("has-error");
-            $("#fname-Glyph").addClass("glyphicon-remove");
-            isAddValidated = 0;
+            $("#fname-Grp").removeClass("has-success").addClass("has-error");
+            $("#fname-Glyph").removeClass("glyphicon-ok").addClass("glyphicon-remove");
+            $("#fname").attr('validated', 'false');
         }
         else {
-            $("#fname-Grp").removeClass("has-error");
-            $("#fname-Glyph").removeClass("glyphicon-remove");
-            $("#fname-Grp").addClass("has-success");
-            $("#fname-Glyph").addClass("glyphicon-ok");
-            isAddValidated++;
+            $("#fname-Grp").removeClass("has-error").addClass("has-success");
+            $("#fname-Glyph").removeClass("glyphicon-remove").addClass("glyphicon-ok");
+            $("#fname").attr('validated', 'true');
         }
     });
 
     $("#lname").keyup(function () {
         var lname = $("#lname").val();
         if (lname == "") {
-            $("#lname-Grp").removeClass("has-success");
-            $("#lname-Glyph").removeClass("glyphicon-ok");
-            $("#lname-Grp").addClass("has-error");
-            $("#lname-Glyph").addClass("glyphicon-remove");
-            isAddValidated = 0;
+            $("#lname-Grp").removeClass("has-success").addClass("has-error");
+            $("#lname-Glyph").removeClass("glyphicon-ok").addClass("glyphicon-remove");
+            $("#lname").attr('validated', 'false');
         }
         else {
-            $("#lname-Grp").removeClass("has-error");
-            $("#lname-Glyph").removeClass("glyphicon-remove");
-            $("#lname-Grp").addClass("has-success");
-            $("#lname-Glyph").addClass("glyphicon-ok");
-            isAddValidated++;
+            $("#lname-Grp").removeClass("has-error").addClass("has-success");
+            $("#lname-Glyph").removeClass("glyphicon-remove").addClass("glyphicon-ok");
+            $("#lname").attr('validated', 'true');
         }
     });
 
     $("div[name^='genderDiv']").click(function () {
-        $("#gender-Grp").removeClass("has-error");
-        $("#gender-Glyph").removeClass("glyphicon-remove");
-        $("#gender-Grp").addClass("has-success");
-        $("#gender-Glyph").addClass("glyphicon-ok");
-        isAddValidated++;
+        $("#gender-Grp").removeClass("has-error").addClass("has-success");
+        $("#gender-Glyph").removeClass("glyphicon-remove").addClass("glyphicon-ok");
     });
 
     $("#countySel").change(function () {
         var countrySel = $("#countySel").val();
         if (countrySel == "") {
-            $("#country-Grp").removeClass("has-success");
-            $("#country-Glyph").removeClass("glyphicon-ok");
-            $("#country-Grp").addClass("has-error");
-            $("#country-Glyph").addClass("glyphicon-remove");
-            isAddValidated = 0;
+            $("#country-Grp").removeClass("has-success").addClass("has-error");
+            $("#country-Glyph").removeClass("glyphicon-ok").addClass("glyphicon-remove");
+            $("#countySel").attr('validated', 'false');
         }
         else {
-            $("#country-Grp").removeClass("has-error");
-            $("#country-Glyph").removeClass("glyphicon-remove");
-            $("#country-Grp").addClass("has-success");
-            $("#country-Glyph").addClass("glyphicon-ok");
-            isAddValidated++;
-        }
-
-    });
-
-    $("#countySel").click(function () {
-        var countrySel = $("#countySel").val();
-        if (countrySel == "") {
-            $("#country-Grp").removeClass("has-success");
-            $("#country-Glyph").removeClass("glyphicon-ok");
-            $("#country-Grp").addClass("has-error");
-            $("#country-Glyph").addClass("glyphicon-remove");
-            isAddValidated = 0;
-        }
-        else {
-            $("#country-Grp").removeClass("has-error");
-            $("#country-Glyph").removeClass("glyphicon-remove");
-            $("#country-Grp").addClass("has-success");
-            $("#country-Glyph").addClass("glyphicon-ok");
-            isAddValidated++;
+            $("#country-Grp").removeClass("has-error").addClass("has-success");
+            $("#country-Glyph").removeClass("glyphicon-remove").addClass("glyphicon-ok");
+            $("#countySel").attr('validated', 'true');
         }
 
     });
@@ -154,72 +98,28 @@ $(document).ready(function () {
     $("#stateSel").change(function () {
         var stateId = $("#stateSel").val();
         if (stateId == "") {
-            $("#state-Grp").removeClass("has-success");
-            $("#state-Glyph").removeClass("glyphicon-ok");
-            $("#state-Grp").addClass("has-error");
-            $("#state-Glyph").addClass("glyphicon-remove");
-            isAddValidated = 0;
+            $("#state-Grp").removeClass("has-success").addClass("has-error");
+            $("#state-Glyph").removeClass("glyphicon-ok").addClass("glyphicon-remove");
+            $("#stateSel").attr('validated', 'false');
         }
         else {
-            $("#state-Grp").removeClass("has-error");
-            $("#state-Glyph").removeClass("glyphicon-remove");
-            $("#state-Grp").addClass("has-success");
-            $("#state-Glyph").addClass("glyphicon-ok");
-            isAddValidated++;
-        }
-    });
-
-    $("#stateSel").click(function () {
-        var stateId = $("#stateSel").val();
-        if (stateId == "") {
-            $("#state-Grp").removeClass("has-success");
-            $("#state-Glyph").removeClass("glyphicon-ok");
-            $("#state-Grp").addClass("has-error");
-            $("#state-Glyph").addClass("glyphicon-remove");
-            isAddValidated = 0;
-        }
-        else {
-            $("#state-Grp").removeClass("has-error");
-            $("#state-Glyph").removeClass("glyphicon-remove");
-            $("#state-Grp").addClass("has-success");
-            $("#state-Glyph").addClass("glyphicon-ok");
-            isAddValidated++;
+            $("#state-Grp").removeClass("has-error").addClass("has-success");
+            $("#state-Glyph").removeClass("glyphicon-remove").addClass("glyphicon-ok");
+            $("#stateSel").attr('validated', 'true');
         }
     });
 
     $("#citySel").change(function () {
         var cityId = $("#citySel").val();
         if (cityId == "") {
-            $("#city-Grp").removeClass("has-success");
-            $("#city-Glyph").removeClass("glyphicon-ok");
-            $("#city-Grp").addClass("has-error");
-            $("#city-Glyph").addClass("glyphicon-remove");
-            isAddValidated = 0;
+            $("#city-Grp").removeClass("has-success").addClass("has-error");
+            $("#city-Glyph").removeClass("glyphicon-ok").addClass("glyphicon-remove");
+            $("#citySel").attr('validated', 'false');
         }
         else {
-            $("#city-Grp").removeClass("has-error");
-            $("#city-Glyph").removeClass("glyphicon-remove");
-            $("#city-Grp").addClass("has-success");
-            $("#city-Glyph").addClass("glyphicon-ok");
-            isAddValidated++;
-        }
-    });
-
-    $("#citySel").click(function () {
-        var cityId = $("#citySel").val();
-        if (cityId == "") {
-            $("#city-Grp").removeClass("has-success");
-            $("#city-Glyph").removeClass("glyphicon-ok");
-            $("#city-Grp").addClass("has-error");
-            $("#city-Glyph").addClass("glyphicon-remove");
-            isAddValidated = 0;
-        }
-        else {
-            $("#city-Grp").removeClass("has-error");
-            $("#city-Glyph").removeClass("glyphicon-remove");
-            $("#city-Grp").addClass("has-success");
-            $("#city-Glyph").addClass("glyphicon-ok");
-            isAddValidated++;
+            $("#city-Grp").removeClass("has-error").addClass("has-success");
+            $("#city-Glyph").removeClass("glyphicon-remove").addClass("glyphicon-ok");
+            $("#citySel").attr('validated', 'true');
         }
     });
 
@@ -228,67 +128,97 @@ $(document).ready(function () {
         $('#AddNewModal').modal('show');
     });
 
-    $("#Add-Btn").click(function () {                                           //add btn click
-        isAddValidated = 0;
-        studentId++;
+    function validateForm(selector) {
+        var inputField = $('#'+selector).val();
+        if (!inputField && inputField.length === 0) {
+            $('#' + selector).closest('.row').find('.form-group').removeClass("has-success").addClass("has-error");
+            $('#' + selector).closest('div').find('.glyphicon').removeClass("glyphicon-ok").addClass("glyphicon-remove");
+            return false;
+        }
+        else {
+            $('#' + selector).closest('.row').find('.form-group').removeClass("has-error").addClass("has-success");
+            $('#' + selector).closest('div').find('.glyphicon').removeClass("glyphicon-remove").addClass("glyphicon-ok");
+            return true;
+        }
+    }
 
-        $("#fname").keyup();                                        //form Validation
-        $("#lname").keyup();
-        $("#countySel").click();
-        $("#stateSel").click();
-        $("#citySel").click();
+    $("#Add-Btn").click(function () {                                           //add btn click        
 
-        //isAddValidated = 5;                                         //enable/disable modal validation
+        if ($("#fname").attr('validated') == 'true' && $("#lname").attr('validated') == 'true' && $("#countySel").attr('validated') == 'true' &&
+                $("#stateSel").attr('validated') == 'true' && $("#citySel").attr('validated') == 'true' && (validateForm('fname') == true) && 
+                (validateForm('lname') == true) && (validateForm('countySel') == true) && (validateForm('stateSel') == true) && (validateForm('citySel') == true) )
+        {            
+            $('#AddNewModal').modal('hide');            
 
-        
-        if (isAddValidated == 5) {
-            if (edit == false) {                
-                $('#AddNewModal').modal('hide');
+            if (edit == false) {
 
-                students.push(['id', studentId]);                                                    //inserting into array
-                students.push(['fname', $("#fname").val()]);            
-                students.push(['lname', $("#lname").val()]);
+                studentId++;
+
+                students.push(['id', studentId]);                                                   //inserting into array
+                students.push(['fname', encodeURI($("#fname").val())]);
+                students.push(['lname', encodeURI($("#lname").val())]);
+
                 var gender = $("input[name='gender']:checked").val();
-                students.push(['gender', gender]);
-                var country = $("#countySel option:selected").text();
-                students.push(['country', country]);
-                var state = $("#stateSel option:selected").text();
-                students.push(['state', state]);
-                var city = $("#citySel option:selected").text();
-                students.push(['city', city]);
+                students.push(['gender', encodeURI(gender)]);
 
-                resetGrid();
+                var country = $("#countySel option:selected").val();                
+                students.push(['country', encodeURI(country)]);
+
+                var state = $("#stateSel option:selected").val();                
+                students.push(['state', encodeURI(state)]);
+
+                var city = $("#citySel option:selected").val();               
+                students.push(['city', encodeURI(city)]);
+
                 $("#footer").append("<span style='color:green'> &#10004; New student added</span><br>");
             }
-            else {                
-                $('#AddNewModal').modal('hide');
-
+            else
+            {
                 for (var i = 0; i < students.length; i += 7) {
                     if (students[i][1] == editId) {
-                        students.splice(i, 7);
+                        students[i + 1][1] = encodeURI($("#fname").val());
+                        students[i + 2][1] = encodeURI($("#lname").val());
+                        students[i + 3][1] = encodeURI($("input[name='gender']:checked").val());
+                        students[i + 4][1] = encodeURI($("#countySel option:selected").val());
+                        students[i + 5][1] = encodeURI($("#stateSel option:selected").val());
+                        students[i + 6][1] = encodeURI($("#citySel option:selected").val());
                     }
                 }
 
-                students.push(['id', studentId]);                                                   //inserting into array
-                students.push(['fname', $("#fname").val()]);            
-                students.push(['lname', $("#lname").val()]);
-                var gender = $("input[name='gender']:checked").val();
-                students.push(['gender', gender]);
-                var country = $("#countySel option:selected").text();
-                students.push(['country', country]);
-                var state = $("#stateSel option:selected").text();
-                students.push(['state', state]);
-                var city = $("#citySel option:selected").text();
-                students.push(['city', city]);
-
-                resetGrid();
                 $("#footer").append("<span style='color:blue'> &#10007; 1 student detail updated</span><br>");
             }
+
+            resetGrid();
         }
-       
+        else {
+            validateForm('fname');
+            validateForm('lname');
+            validateForm('countySel');
+            validateForm('stateSel');
+            validateForm('citySel');
+        }
     });                                    
 
     function update(id, fname, lname, gender, country, state, city) {
+
+        for (var i = 0; i < countries.length; i++) {
+            if (countries[i].id == country) {
+                country = countries[i].name;
+            }
+        }
+
+        for (var i = 0; i < states.length; i++) {
+            if (states[i].id == state) {
+                state = states[i].name;
+            }
+        }
+
+        for (var i = 0; i < cities.length; i++) {
+            if (cities[i].id == city) {
+                city = cities[i].name;
+            }
+        }
+
         $("#studentGrid").append("<li class='list-group-item'> \
                 <div class='row'>\
                     <div class='col-sm-1 id hidden'>"+ id +"</div>\
@@ -360,57 +290,40 @@ $(document).ready(function () {
                 </div>\
                 </li>");
         for (var i = 0; i < students.length; i += 7) {
-            i1 = i + 1;
-            i2 = i + 2;
-            i3 = i + 3;
-            i4 = i + 4;
-            i5 = i + 5;
-            i6 = i + 6;
-            update(students[i][1], students[i1][1], students[i2][1], students[i3][1], students[i4][1], students[i5][1], students[i6][1]);     //data print
+            var fname = i + 1;
+            var lname = i + 2;
+            var gender = i + 3;
+            var country = i + 4;
+            var state = i + 5;
+            var city = i + 6;
+            update(students[i][1], students[fname][1], students[lname][1], students[gender][1], students[country][1], students[state][1], students[city][1]);     //data print
         }
-    }
-
-    function valueReset(id) {
-        $("#" + id).prop('selectedIndex', 0);                                                             //dropdown reset
-    }                                                                                                  
+    }                                                                                                    
 
     function clearModal() {
         $("#fname").val("");
-        $("#fname-Grp").removeClass("has-success");
-        $("#fname-Glyph").removeClass("glyphicon-ok");
-        $("#fname-Grp").removeClass("has-error");
-        $("#fname-Glyph").removeClass("glyphicon-remove");
+        $("#fname-Grp").removeClass("has-success has-error");
+        $("#fname-Glyph").removeClass("glyphicon-ok glyphicon-remove");
+
         $("#lname").val("");
-        $("#lname-Grp").removeClass("has-success");
-        $("#lname-Glyph").removeClass("glyphicon-ok");
-        $("#lname-Grp").removeClass("has-error");
-        $("#lname-Glyph").removeClass("glyphicon-remove");
-        valueReset("countySel");
-        valueReset("stateSel");
-        valueReset("citySel");
-        $("#gender-Grp").removeClass("has-success");
-        $("#gender-Glyph").removeClass("glyphicon-ok");
-        $("#gender-Grp").removeClass("has-error");
-        $("#gender-Glyph").removeClass("glyphicon-remove");
-        $("#country-Grp").removeClass("has-success");
-        $("#country-Glyph").removeClass("glyphicon-ok");
-        $("#country-Grp").removeClass("has-error");
-        $("#country-Glyph").removeClass("glyphicon-remove");
-        $("#state-Grp").removeClass("has-success");
-        $("#state-Glyph").removeClass("glyphicon-ok");
-        $("#state-Grp").removeClass("has-error");
-        $("#state-Glyph").removeClass("glyphicon-remove");
-        $("#city-Grp").removeClass("has-success");
-        $("#city-Glyph").removeClass("glyphicon-ok");
-        $("#city-Grp").removeClass("has-error");
-        $("#city-Glyph").removeClass("glyphicon-remove");
+        $("#lname-Grp").removeClass("has-success has-error");
+        $("#lname-Glyph").removeClass("glyphicon-ok glyphicon-remove");
 
+        $("#gender-Grp").removeClass("has-success has-error");
+        $("#gender-Glyph").removeClass("glyphicon-ok glyphicon-remove");
+
+        $("#country-Glyph").removeClass("glyphicon-ok").removeClass("glyphicon-remove");
+        $("#country-Grp").removeClass("has-success").removeClass("has-error");
+
+        $("#state-Glyph").removeClass("glyphicon-ok").removeClass("glyphicon-remove");
+        $("#state-Grp").removeClass("has-success").removeClass("has-error");
+
+        $("#city-Glyph").removeClass("glyphicon-ok").removeClass("glyphicon-remove");
+        $("#city-Grp").removeClass("has-success").removeClass("has-error");
     }                                                                               //clear Modal
-
 
     $("#Add-Cancel").click(function () {                                                                    //cancel btn click
         $('#AddNewModal').modal('hide');
-        //clearModal();
         $("#footer").append("<span style='color:red'> &#10007; No new student added/edited</span><br>");
     });                                
     
@@ -440,12 +353,12 @@ $(document).ready(function () {
 
         for (var i = 0; i < students.length; i += 7) {       
             if (students[i][1] == id) {                      
-                fname = i + 1;                               
-                lname = i + 2;                               
-                gender = i + 3;                              
-                country = i + 4;                             
-                state = i + 5;                               
-                city = i + 6;                                
+                var fname = i + 1;                               
+                var lname = i + 2;                               
+                var gender = i + 3;                              
+                var country = i + 4;                             
+                var state = i + 5;                               
+                var city = i + 6;                                
                                                              
                 $("#fname").val(students[fname][1]);         
                 $("#lname").val(students[lname][1]);
@@ -453,69 +366,87 @@ $(document).ready(function () {
 
                 if (students[gender][1] == "male")
                 {
-                    $('#male').prop('checked', true);
-                    $('#male').parent().click();
+                    $('#male').prop('checked', true).parent().click();
                 }
                 else if (students[gender][1] == "female")
                 {
-                    $('#female').prop('checked', true);
-                    $('#female').parent().click();
+                    $('#female').prop('checked', true).parent().click();                    
                 }
                 else {
-                    $('#others').prop('checked', true);
-                    $('#others').parent().click();
+                    $('#others').prop('checked', true).parent().click();                    
                 }
                 $("#gender-Glyph").removeClass("glyphicon-ok");
 
-                $("#countySel").val(students[country][1].toString());
-                $("#countySel").change();
+                $("#countySel").val(students[country][1]).change();              
                 $("#country-Glyph").removeClass("glyphicon-ok");
                 $("#country-Grp").removeClass("has-success");
 
-                $("#stateSel").val(students[state][1].toString());
-                $("#stateSel").change();
+                $("#stateSel").val(students[state][1]).change();
                 $("#state-Glyph").removeClass("glyphicon-ok");
                 $("#state-Grp").removeClass("has-success");
 
-                $("#citySel").val(students[city][1].toString());
+                $("#citySel").val(students[city][1]);
+                $("#city-Glyph").removeClass("glyphicon-ok");
+                $("#city-Grp").removeClass("has-success");
             }                                                
         }               
     });
 
-    $('#AddNewModal').on('show.bs.modal', function () {
+    $('#AddNewModal').on('show.bs.modal', function ()
+    {
         clearModal();
-
-        if (edit == true) {
-            $("#Add-Btn").text("Update");
-        }
-        else {
-            $("#Add-Btn").text("Add");
-        }
 
         $('#male').parent().click();
         $("#gender-Glyph").removeClass("glyphicon-ok");
 
-        if (edit == false) {
-            $("#countySel").selectedIndex = 0;
-            $("#countySel").change();
-            $("#country-Glyph").removeClass("glyphicon-remove");
-            $("#country-Grp").removeClass("has-error");
+        if (edit == true) {
+            $("#Add-Btn").text("Update");
 
-            $("#stateSel").selectedIndex = 0;
-            $("#stateSel").change();
-            $("#state-Glyph").removeClass("glyphicon-remove");
-            $("#state-Grp").removeClass("has-error");
+            $("#fname").attr('validated', 'true');
+            $("#lname").attr('validated', 'true');
+            $("#countySel").attr('validated', 'true');
+            $("#stateSel").attr('validated',  'true');
+            $("#citySel").attr('validated',   'true');
+        }
+        else {
+            $("#Add-Btn").text("Add");
+
+            $("#countySel").empty().html("<option value=''>Select Country</option>");            
+            countries.forEach(addCntry);
+            $("#country-Glyph").removeClass("glyphicon-ok").removeClass("glyphiuecon-remove");
+            $("#country-Grp").removeClass("has-success").removeClass("has-error");
+
+            $("#stateSel").empty().html("<option value=''>Select State</option>");
+            $("#citySel").empty().html("<option value=''>Select City</option>");
+
+            $("#state-Glyph").removeClass("glyphicon-ok").removeClass("glyphicon-remove");
+            $("#state-Grp").removeClass("has-success").removeClass("has-error");
+
+            $("#city-Glyph").removeClass("glyphicon-ok").removeClass("glyphicon-remove");
+            $("#city-Grp").removeClass("has-success").removeClass("has-error");
+
+            $("#fname").attr('validated', 'false');
+            $("#lname").attr('validated', 'false');
+            $("#countySel").attr('validated', 'false');
+            $("#stateSel").attr('validated', 'false');
+            $("#citySel").attr('validated', 'false');
         }
     });
 
     $('#AddNewModal').on('shown.bs.modal', function () {
-        $("#fname").focus();
-        
+        $("#fname").focus();        
+    });
+    
+    $(document).on("change", "#countySel", function () {
+        $("#stateSel").empty().html("<option value=''>Select State</option>");
+        $("#citySel").empty().html("<option value=''>Select City</option>");
+        states.forEach(addState);
     });
 
+    $(document).on("change", "#stateSel", function () {
 
+        $("#citySel").empty().html("<option value=''>Select City</option>");
+        cities.forEach(addCity);
+    });
 
-
-
-  
 });

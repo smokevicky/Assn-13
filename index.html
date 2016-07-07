@@ -1,13 +1,7 @@
 <html>
 <head>
-<<<<<<< HEAD
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="./Custom.css">
-
-=======
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="Custom.css">
->>>>>>> origin/gh-pages
 </head>
 <body class="container-fluid">
     
@@ -96,7 +90,7 @@
                                                 First Name :
                                             </div>
                                             <div class="col-sm-9">
-                                                <input type="text" id="fname" class="form-control" autocomplete="off" maxlength="30" placeholder="Enter First Name (Max 30)" />
+                                                <input type="text" id="fname" validated="false" class="form-control" autocomplete="off" maxlength="30" placeholder="Enter First Name (Max 30)" />
                                                 <span class="glyphicon form-control-feedback" id="fname-Glyph"></span>
                                             </div>
                                         </div>
@@ -108,7 +102,7 @@
                                                 Last Name :
                                             </div>
                                             <div class="col-sm-9">
-                                                <input type="text" id="lname" class="form-control" autocomplete="off" required maxlength="30" placeholder="Enter Last Name (Max 30)" />
+                                                <input type="text" id="lname" validated="false" class="form-control" autocomplete="off" required maxlength="30" placeholder="Enter Last Name (Max 30)" />
                                                 <span class="glyphicon form-control-feedback" id="lname-Glyph"></span>
                                             </div>
                                         </div>
@@ -142,7 +136,7 @@
                                                 Select Location:
                                             </div>
                                             <div class="col-sm-9">
-                                                <select name="country" class="countries form-control" id="countySel">
+                                                <select name="country" class="countries form-control" id="countySel" validated="false">
                                                     <option value="">Select Country</option>
                                                 </select>
                                                 <span id="country-Glyph" class="glyphicon form-control-feedback"></span>
@@ -154,10 +148,10 @@
 
                                     <div class="row">
 
-                                        <div class="form-group has-feedback col-sm-12">
+                                        <div class="form-group has-feedback col-sm-12" id="state-Grp">
                                             <div class="col-sm-3"></div>
-                                            <div class="col-sm-9" id="state-Grp">
-                                                <select name="state" class="states form-control" id="stateSel">
+                                            <div class="col-sm-9" >
+                                                <select name="state" class="states form-control" id="stateSel" validated="false">
                                                     <option value="">Select State</option>
                                                 </select>
                                                 <span id="state-Glyph" class="glyphicon form-control-feedback"></span>
@@ -168,10 +162,10 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="form-group has-feedback col-sm-12">
+                                        <div class="form-group has-feedback col-sm-12" id="city-Grp">
                                             <div class="col-sm-3"></div>
-                                            <div class="col-sm-9" id="city-Grp">
-                                                <select name="city" class="cities form-control" id="citySel">
+                                            <div class="col-sm-9" >
+                                                <select name="city" class="cities form-control" id="citySel" validated="false">
                                                     <option value="">Select City</option>
                                                 </select>
                                                 <span id="city-Glyph" class="glyphicon form-control-feedback"></span>
@@ -196,18 +190,8 @@
     </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<<<<<<< HEAD
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <!--<script src="https://iamrohit.in/lab/js/location.js"></script>-->
         <script src="./Custom.js"></script>
-
-        <script>
-        $(document).ready(function () {
-=======
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <!--<script src="http://iamrohit.in/lab/js/location.js"></script>-->
-        <script src="Custom.js"></script>
->>>>>>> origin/gh-pages
 
         </body>
 </html>
